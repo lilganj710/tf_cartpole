@@ -83,7 +83,6 @@ class DDQNAgent:
 
         q_current_states = self.q_model.predict(current_states, verbose=0)
         q_next_states_target = self.q_target_model.predict(next_states, verbose=0)
-        current_action_values = q_current_states[np.arange(batch_size), actions]
 
         bellman_targets = rewards + self.gamma * (1 - done) * np.max(q_next_states_target, axis=1)
         q_current_states[np.arange(batch_size), actions] = bellman_targets
